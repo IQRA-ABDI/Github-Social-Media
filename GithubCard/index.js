@@ -5,6 +5,7 @@
     https://api.github.com/users/<your name>
 */
 
+// axios.get("https://api.github.com/users/IQRA-ABDI")
 
 
 /*
@@ -36,6 +37,7 @@
 */
 
 
+  
 
 /*
   STEP 4: Pass the data received from Github into your function, and append the returned markup to the DOM as a child of .cards
@@ -51,6 +53,92 @@
     Using that array, iterate over it, requesting data for each user, creating a new card for each user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+function gitmaker(data) {
+
+  //step1: create elements
+const mainCard = document.createElement('div')
+const Profileimage = document.createElement('img')
+const info = document.createElement('div')
+const Profilename = document.createElement('h3')
+const username = document.createElement('p')
+const location = document.createElement('p')
+const followers = document.createElement('p')
+const following = document.createElement('p')
+const bio = document.createElement('p')
 
 
+//step2: connect elements
+mainCard.appendChild(Profileimage)
+mainCard.appendChild(info)
+info.appendChild(Profilename)
+info.appendChild(username)
+info.appendChild(location)
+info.appendChild(followers)
+info.appendChild(following)
+info.appendChild(bio)
+
+//step3: connect to css using classlist
+
+  mainCard.classList.add("card")
+  info.classList.add("card-info")
+  Profilename.classList.add("name")
+  username.classList.add("username")
+
+  //step4: add content  
+    Profileimage.src= data.avatar_url 
+    Profilename.textContent = data.name
+    username.textContent = data.login
+    location.textContent = data.location
+    followers.textContent = data.followers
+    following.textContent = data.following
+    bio.textContent = data.bio
+
+
+
+    return mainCard
+
+}
+
+let Teacher = document.querySelector(".cards")
+axios.get("https://api.github.com/users/duraanali")
+.then(function(respond){
+  Teacher.appendChild(gitmaker(respond.data))
+})
+
+
+.catch(function(err){
+console.log(err)
+})
+
+let mine = document.querySelector(".cards")
+axios.get("https://api.github.com/users/IQRA-ABDI")
+.then(function(respond){
+  mine.appendChild(gitmaker(respond.data))
+})
+
+
+.catch(function(err){
+console.log(err)
+})  
+
+let Freind = document.querySelector(".cards")
+axios.get("https://api.github.com/users/abdal-sharif")
+.then(function(respond){
+  Freind .appendChild(gitmaker(respond.data))
+})
+
+
+.catch(function(err){
+console.log(err)
+})  
+
+let freind2 = document.querySelector(".cards")
+axios.get("https://api.github.com/users/abdullahiheart")
+.then(function(respond){
+  freind2.appendChild(gitmaker(respond.data))
+})
+
+
+.catch(function(err){
+console.log(err)
+})
